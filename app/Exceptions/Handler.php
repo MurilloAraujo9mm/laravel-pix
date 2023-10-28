@@ -27,4 +27,13 @@ class Handler extends ExceptionHandler
             //
         });
     }
+
+    public function render($request, Throwable $exception)
+    {
+        if ($exception instanceof \Illuminate\Http\Exceptions\ThrottleRequestsException) {
+            return response()->json(['message' => 'Sua mensagem personalizada aqui'], 429);
+        }
+
+        return parent::render($request, $exception);
+    }
 }

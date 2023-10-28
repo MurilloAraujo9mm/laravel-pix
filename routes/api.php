@@ -1,7 +1,9 @@
 <?php
 
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\TransactionController;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\AuthController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,6 +16,18 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+Route::prefix('v1')->group(function () {
+    Route::post('/register', [AuthController::class, 'register']);
+    Route::post('/login', [AuthController::class, 'login']);
+    Route::post('/logout', [AuthController::class, 'logout']);
+
+    Route::middleware(['auth:api', 'check.blacklist', 'custom.throttle:10,1'])->group(function() {
+        Route::post('/transactions', [TransactionController::class, 'store']);
+
+        Route::get('/users', [UserController::class, 'index']);
+        Route::post('/users', [UserController::class, 'store']);
+        Route::get('/users/{id}', [UserController::class, 'show']);
+        Route::get('/users/email/{email}', [UserController::class, 'showByEmail']);
+        Route::get('/users/latest', [UserController::class, 'showLatest']);
+    });
 });
