@@ -6,15 +6,31 @@ use App\Repositories\Interfaces\AuthRepositoryInterface;
 use Tymon\JWTAuth\Facades\JWTAuth;
 use Illuminate\Support\Facades\Hash;
 
+/**
+ * Class AuthService
+ * Service for authentication-related functionalities.
+ */
 class AuthService
 {
+    /** 
+     * @var AuthRepositoryInterface
+     */
     protected $authRepository;
 
+    /**
+     * AuthService constructor.
+     * @param AuthRepositoryInterface $authRepository
+     */
     public function __construct(AuthRepositoryInterface $authRepository)
     {
         $this->authRepository = $authRepository;
     }
 
+    /**
+     * Registers a new user and returns a JWT token.
+     * @param array $data
+     * @return string
+     */
     public function register(array $data): string
     {
         $data['password'] = Hash::make($data['password']);
@@ -22,6 +38,11 @@ class AuthService
         return JWTAuth::fromUser($user);
     }
 
+    /**
+     * Logs in a user based on their credentials.
+     * @param array $credentials
+     * @return array|null
+     */
     public function login(array $credentials): ?array
     {
         $user = $this->authRepository->findByCredentials($credentials);
@@ -33,11 +54,15 @@ class AuthService
     
         return [
             'token' => $token,
-            'user' => $user->makeHidden(['password'])  
+            'user' => $user->makeHidden(['password'])
         ];
     }
     
-
+    /**
+     * Logs out a user and invalidates their JWT token.
+     * @param string $token
+     * @return void
+     */
     public function logout(string $token): void
     {
         if (!$this->authRepository->checkIfTokenIsBlacklisted($token)) {
@@ -46,6 +71,11 @@ class AuthService
         }
     }
 
+    /**
+     * Checks if a token is blacklisted.
+     * @param string $token
+     * @return bool
+     */
     public function isTokenBlacklisted(string $token): bool
     {
         return $this->authRepository->checkIfTokenIsBlacklisted($token);

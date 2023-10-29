@@ -5,9 +5,10 @@ namespace App\Services;
 use App\Models\Account;
 use App\Repositories\Interfaces\AccountRepositoryInterface;
 use App\Repositories\Interfaces\TransactionRepositoryInterface;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
+use App\Services\AMQP\RabbitMQ;
 
 /**
  * Handles transaction-related operations.
@@ -51,7 +52,9 @@ class TransactionService
     public function processTransfer(string $pixKey, float $amount, string $transactionType): void
     {
         DB::transaction(function () use ($pixKey, $amount, $transactionType) {
+
             $recipientAccount = Account::where('pix_key', $pixKey)->first();
+            
 
             if (!$recipientAccount) {
                 throw new \Exception('Destinatário não encontrado pela chave Pix.');
@@ -82,6 +85,17 @@ class TransactionService
             ];
 
             $this->recordTransaction($data);
+               
+            (new RabbitMQ())->producer(
+                env('RABBITMQ_QUEUE', 'default_queue_name'), [
+                    'amount' => number_format($amount, 2, '.',''),
+                    "key_pix" => $recipientAccount->pix_key,
+                    'transaction_date' => now(),
+                    'description' => $this->validateTransactionType($transactionType)
+                ],
+                'amq.direct'
+            );
+        
         });
     }
 

@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\QueueController;
 
 /*
 |--------------------------------------------------------------------------
@@ -37,6 +38,9 @@ Route::prefix('v1')->name('v1.')->group(function () {
             Route::get('/email/{email}', [UserController::class, 'showByEmail'])->name('showByEmail');
             Route::get('/latest', [UserController::class, 'showLatest'])->name('showLatest');
         });
+
+        Route::get('/check-queue', [QueueController::class, 'checkQueue']);
+
         
     });
 });

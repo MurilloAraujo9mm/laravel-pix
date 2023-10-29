@@ -45,6 +45,7 @@ class AccountService
      */
     public function createAccount(array $data): Account
     {
+        
         return $this->accountRepository->create($data);
     }
 

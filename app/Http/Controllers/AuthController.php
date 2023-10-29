@@ -10,9 +10,7 @@ use Tymon\JWTAuth\Facades\JWTAuth;
 
 class AuthController extends Controller
 {
-    /** 
-     * The authentication service instance.
-     */
+    /** The authentication service instance */
     protected AuthService $authService;
 
     /**
