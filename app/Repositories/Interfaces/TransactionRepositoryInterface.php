@@ -8,7 +8,8 @@ interface TransactionRepositoryInterface
      * Fetch all transactions.
      * @return \Illuminate\Database\Eloquent\Collection|static[]
      */
-    public function all();
+    public function all(): \Illuminate\Database\Eloquent\Collection;
+
 
     /**
      * Create a new transaction record.

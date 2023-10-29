@@ -22,15 +22,21 @@ class AuthService
         return JWTAuth::fromUser($user);
     }
 
-    public function login(array $credentials): ?string
+    public function login(array $credentials): ?array
     {
         $user = $this->authRepository->findByCredentials($credentials);
         if (!$user || !Hash::check($credentials['password'], $user->password)) {
             return null;
         }
-
-        return JWTAuth::fromUser($user);
+    
+        $token = JWTAuth::fromUser($user);
+    
+        return [
+            'token' => $token,
+            'user' => $user->makeHidden(['password'])  
+        ];
     }
+    
 
     public function logout(string $token): void
     {
