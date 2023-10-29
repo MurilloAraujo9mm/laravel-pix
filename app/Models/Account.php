@@ -4,39 +4,68 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Support\Str;
 
+/**
+ * App\Models\Account
+ * An Eloquent model representing a user's account.
+ * @property int $id
+ * @property int $user_id
+ * @property float $balance
+ * @property string $account_number
+ *
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Transaction[] $sentTransactions
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Transaction[] $receivedTransactions
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\BalanceHistory[] $balanceHistories
+ */
 class Account extends Model
 {
     use HasFactory;
 
-    const ACCOUNT_NUMBER_LENGTH = 12;
-    const ALLOWED_CHARACTERS = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
-
+    /**
+     * The attributes that are mass assignable.
+     * @var array
+     */
     protected $fillable = [
         'user_id',
         'balance',
-        'account_number',
+        'account_number'
     ];
 
     /**
-     * Generate a random account number.
-     * @return string
+     * Get the transactions sent from this account.
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function generateRandomAccountNumber(): string {
-        $accountNumber = '';
-        for ($i = 0; $i < self::ACCOUNT_NUMBER_LENGTH; $i++) {
-            $accountNumber .= $this->getRandomCharacter();
-        }
-        return $accountNumber;
+    public function sentTransactions(): HasMany
+    {
+        return $this->hasMany(Transaction::class, 'from_account_id');
     }
 
-     /**
-     * Get a random character from the allowed characters string.
-     * @return string
+    /**
+     * Get the transactions received by this account.
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    private function getRandomCharacter() {
-        $index = rand(0, strlen(self::ALLOWED_CHARACTERS) - 1);
-        return self::ALLOWED_CHARACTERS[$index];
+    public function receivedTransactions(): HasMany
+    {
+        return $this->hasMany(Transaction::class, 'to_account_id');
     }
-    
+
+    /**
+     * Get the balance histories for this account.
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function balanceHistories(): HasMany
+    {
+        return $this->hasMany(BalanceHistory::class);
+    }
+
+    protected static function boot()
+    {
+        parent::boot();
+
+        self::creating(function ($model) {
+            $model->pix_key = Str::uuid();
+        });
+    }
 }

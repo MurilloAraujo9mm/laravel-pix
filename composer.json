@@ -10,7 +10,9 @@
         "laravel/framework": "^10.10",
         "laravel/sanctum": "^3.2",
         "laravel/tinker": "^2.8",
-        "tymon/jwt-auth": "^2.0"
+        "ramsey/uuid": "^4.7",
+        "tymon/jwt-auth": "^2.0",
+        "vladimir-yuldashev/laravel-queue-rabbitmq": "^13.3"
     },
     "require-dev": {
         "fakerphp/faker": "^1.9.1",

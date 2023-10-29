@@ -41,4 +41,7 @@ interface AccountRepositoryInterface
      * @return \App\Models\Account|null - Most recent account or null if none found.
      */
     public function findLatest();
+
+    public function getLoggedInUserAccount();
+
 }

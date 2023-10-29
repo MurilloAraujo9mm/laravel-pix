@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StoreAccountRequest; 
+use App\Http\Requests\StoreAccountRequest;
 use App\Services\AccountService;
 use Illuminate\Http\JsonResponse;
 
@@ -25,7 +25,7 @@ class AccountController extends Controller
      * @param StoreAccountRequest $request
      * @return JsonResponse
      */
-    public function store(StoreAccountRequest $request): JsonResponse
+    public function store(StoreAccountRequest $request): ?JsonResponse
     {
         $validatedData = $request->validated();
         

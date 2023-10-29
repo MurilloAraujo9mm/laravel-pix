@@ -16,6 +16,11 @@ class BalanceHistory extends Model
         'account_id',
         'amount',
         'balance',
-        'description',
+        'description'
     ];
+
+    public function account()
+    {
+        return $this->belongsTo(Account::class);
+    }
 }

@@ -5,6 +5,8 @@ namespace App\Services;
 use App\Repositories\UserRepository;
 use App\Repositories\AccountRepository;
 use Illuminate\Support\Str;
+use Ramsey\Uuid\Uuid;
+
 
 class UserService
 {
@@ -34,13 +36,20 @@ class UserService
             throw new \Exception('Falha ao criar o usuário.');
         }
 
-        $this->accountRepository->create(
-            $user->id, 
-            $data['balance'], 
-            $this->generateRandomAccountNumber()
-        );
+        $this->accountRepository->create([
+            'user_id' => $user->id,
+            'balance' => $data['balance'],
+            'account_number' => $this->generateRandomAccountNumber(),
+            'pix_key' => $this->generatePixKeyForUser($user)
+        ]);
+
 
         return $user;
+    }
+
+    protected function generatePixKeyForUser(): string
+    {
+        return Uuid::uuid4()->toString();
     }
 
     protected function generateRandomAccountNumber()

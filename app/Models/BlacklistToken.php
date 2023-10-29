@@ -11,7 +11,7 @@ class BlacklistToken extends Model
      *
      * @var string
      */
-    protected $table = 'nome_da_sua_tabela'; // Por exemplo: 'blacklist_tokens'
+    protected $table = 'nome_da_sua_tabela';
 
     /**
      * The attributes that are mass assignable.
@@ -19,7 +19,7 @@ class BlacklistToken extends Model
      * @var array
      */
     protected $fillable = [
-        'token', 'blacklisted_at' // Adicione quaisquer outros campos que deseja tornar "mass assignable"
+        'token', 'blacklisted_at'
     ];
     
     /**
@@ -28,7 +28,7 @@ class BlacklistToken extends Model
      * @var array
      */
     protected $hidden = [
-        'token',  // Você pode querer ocultar o token quando converter o modelo para uma array ou JSON
+        'token', 
     ];
     
     /**

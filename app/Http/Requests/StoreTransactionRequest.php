@@ -12,7 +12,7 @@ class StoreTransactionRequest extends FormRequest
      */
     public function authorize()
     {
-        return true; // Você pode adicionar lógica de autorização aqui se necessário
+        return true; 
     }
 
     /**
@@ -23,12 +23,9 @@ class StoreTransactionRequest extends FormRequest
     public function rules()
     {
         return [
-            'sender_id' => 'required|exists:users,id',
-            'sender_account_id' => 'required|exists:accounts,id',
-            'recipient_id' => 'required|exists:users,id',
-            'recipient_account_id' => 'required|exists:accounts,id',
+            'pix_key' => 'required|string',
             'amount' => 'required|numeric|min:0.01',
-            'description' => 'nullable|string',
+            'description' => 'required|string',
         ];
     }
 }

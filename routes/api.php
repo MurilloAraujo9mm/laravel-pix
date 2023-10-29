@@ -16,18 +16,27 @@ use App\Http\Controllers\AuthController;
 |
 */
 
-Route::prefix('v1')->group(function () {
-    Route::post('/register', [AuthController::class, 'register']);
-    Route::post('/login', [AuthController::class, 'login']);
-    Route::post('/logout', [AuthController::class, 'logout']);
+Route::prefix('v1')->name('v1.')->group(function () {
+
+    Route::post('/register', [AuthController::class, 'register'])->name('register');
+    Route::post('/login', [AuthController::class, 'login'])->name('login');
+    Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
     Route::middleware(['auth:api', 'check.blacklist', 'custom.throttle:10,1'])->group(function() {
-        Route::post('/transactions', [TransactionController::class, 'store']);
 
-        Route::get('/users', [UserController::class, 'index']);
-        Route::post('/users', [UserController::class, 'store']);
-        Route::get('/users/{id}', [UserController::class, 'show']);
-        Route::get('/users/email/{email}', [UserController::class, 'showByEmail']);
-        Route::get('/users/latest', [UserController::class, 'showLatest']);
+        Route::prefix('transaction')->name('transactions.')->group(function() {
+            Route::post('/create', [TransactionController::class, 'store'])->name('store');
+            Route::get('/list', [TransactionController::class, 'listTransactions'])->name('list');
+        });
+
+        // User routes
+        Route::prefix('users')->name('users.')->group(function() {
+            Route::get('/', [UserController::class, 'index'])->name('index');
+            Route::post('/', [UserController::class, 'store'])->name('store');
+            Route::get('/{id}', [UserController::class, 'show'])->name('show');
+            Route::get('/email/{email}', [UserController::class, 'showByEmail'])->name('showByEmail');
+            Route::get('/latest', [UserController::class, 'showLatest'])->name('showLatest');
+        });
+        
     });
 });
