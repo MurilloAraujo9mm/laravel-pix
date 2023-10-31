@@ -96,7 +96,7 @@ RabbitMQ (opcional)
 1 - Clone o repositório:
 bash
 Copy code
-git clone https://github.com/seu_usuario/seu_projeto.git
+git clone [https://github.com/seu_usuario/seu_projeto.git](https://github.com/MurilloAraujo9mm/laravel-pix.git)
 Instale as dependências:
 bash
 Copy code
@@ -136,6 +136,11 @@ GET /v1/check-queue - Verificar status da fila.
 POST /api/v1/users/details - Webhook para receber notificações de atualizações de usuário.
 🤝 Contribuição
 🌟 Pull requests são bem-vindos! Para mudanças importantes, abra uma issue primeiro para discutir o que você gostaria de mudar.
+
+Diagrama C4:
+
+![image](https://github.com/MurilloAraujo9mm/laravel-pix/assets/26441702/3aa716cf-b5c6-4734-a168-83015cf4c852)
+
 
 📜 Licença
 MIT
