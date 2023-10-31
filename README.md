@@ -1,74 +1,84 @@
+<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+
 <p align="center">
-    <a href="https://laravel.com" target="_blank">
-        <img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo">
-    </a>
+<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
+<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
+<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
+<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
 </p>
-<p align="center">
-    <a href="https://github.com/laravel/framework/actions">
-        <img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status">
-    </a>
-    <a href="https://packagist.org/packages/laravel/framework">
-        <img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads">
-    </a>
-    <a href="https://packagist.org/packages/laravel/framework">
-        <img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version">
-    </a>
-    <a href="https://packagist.org/packages/laravel/framework">
-        <img src="https://img.shields.io/packagist/l/laravel/framework" alt="License">
-    </a>
-</p>
-Sobre o Laravel
-Laravel é um framework de aplicação web com uma sintaxe expressiva e elegante. Acreditamos que o desenvolvimento deve ser uma experiência agradável e criativa para ser verdadeiramente gratificante. O Laravel simplifica o desenvolvimento, facilitando tarefas comuns usadas em muitos projetos web, tais como:
 
-Motor de roteamento simples e rápido.
-Container de injeção de dependência poderoso.
-Back-ends múltiplos para sessão e armazenamento em cache.
-ORM de banco de dados expressivo e intuitivo.
-Migrações de esquema agnósticas de banco de dados.
-Processamento robusto de jobs em background.
-Transmissão de eventos em tempo real.
-O Laravel é acessível, poderoso e fornece as ferramentas necessárias para aplicações grandes e robustas.
+## About Laravel
 
-Aprendendo Laravel
-O Laravel possui a mais extensa documentação e biblioteca de tutoriais em vídeo de todos os frameworks de aplicação web modernos, facilitando o início com o framework.
+Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
 
-Você também pode experimentar o Laravel Bootcamp, onde será orientado na construção de uma aplicação Laravel moderna do zero.
+- [Simple, fast routing engine](https://laravel.com/docs/routing).
+- [Powerful dependency injection container](https://laravel.com/docs/container).
+- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
+- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
+- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
+- [Robust background job processing](https://laravel.com/docs/queues).
+- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
 
-Se você prefere vídeos, o Laracasts pode ajudar. O Laracasts contém mais de 2000 tutoriais em vídeo sobre diversos tópicos, incluindo Laravel, PHP moderno, testes unitários e JavaScript. Aprimore suas habilidades com nossa vasta biblioteca de vídeos.
+Laravel is accessible, powerful, and provides tools required for large, robust applications.
 
-Patrocinadores do Laravel
-Agradecemos aos seguintes patrocinadores por financiarem o desenvolvimento do Laravel. Se você estiver interessado em se tornar um patrocinador, por favor, visite a página de Patreon do Laravel.
+## Learning Laravel
 
-Parceiros Premium
-Vehikl
-Tighten Co.
-Kirschbaum Development Group
-... [e outros]
-Contribuindo
-Obrigado por considerar a contribuição para o framework Laravel! O guia de contribuição pode ser encontrado na documentação do Laravel.
+Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
 
-Código de Conduta
-Para garantir que a comunidade Laravel seja acolhedora para todos, revise e siga o Código de Conduta.
+You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
 
-Vulnerabilidades de Segurança
-Se você descobrir uma vulnerabilidade de segurança no Laravel, por favor, envie um e-mail para Taylor Otwell em taylor@laravel.com. Todas as vulnerabilidades de segurança serão prontamente abordadas.
+If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 2000 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
 
-Licença
-O framework Laravel é um software de código aberto licenciado sob a licença MIT.
+## Laravel Sponsors
+
+We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+
+### Premium Partners
+
+- **[Vehikl](https://vehikl.com/)**
+- **[Tighten Co.](https://tighten.co)**
+- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
+- **[64 Robots](https://64robots.com)**
+- **[Cubet Techno Labs](https://cubettech.com)**
+- **[Cyber-Duck](https://cyber-duck.co.uk)**
+- **[Many](https://www.many.co.uk)**
+- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
+- **[DevSquad](https://devsquad.com)**
+- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
+- **[OP.GG](https://op.gg)**
+- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
+- **[Lendio](https://lendio.com)**
+
+## Contributing
+
+Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+
+## Code of Conduct
+
+In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+
+## Security Vulnerabilities
+
+If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+
+## License
+
+The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+
 
 🚀 Sistema de Transações em Laravel
-
-Um sistema simplificado projetado usando o modelo de diagrama C4, para gerenciar transações financeiras e autenticação de usuários em Laravel.
+Um sistema simplificado para gerenciar transações financeiras e autenticação de usuários em Laravel.
 
 📋 Índice
-
 Recursos
 Pré-requisitos
 Instalação
 Rotas
 Webhooks
 Contribuição
+
 Licença
+
 ✨ Recursos
 🔐 Registro e autenticação de usuários.
 📜 Listagem de transações do usuário autenticado.
@@ -76,16 +86,57 @@ Licença
 📡 Webhook para notificar atualizações de usuários.
 
 🧰 Pré-requisitos
-
 PHP >= 7.4
 Composer
 Servidor MySQL
 Laravel 8.x
 RabbitMQ (opcional)
-🛠️ Instalação
 
-Clone o repositório: git clone https://github.com/seu_usuario/seu_projeto.git
-Instale as dependências: cd seu_projeto && composer install
+🛠️ Instalação
+1 - Clone o repositório:
+bash
+Copy code
+git clone https://github.com/seu_usuario/seu_projeto.git
+Instale as dependências:
+bash
+Copy code
+cd seu_projeto
+composer install
 Configure o arquivo .env com as informações do banco de dados e outras configurações.
-Execute as migrações: php artisan migrate
-Inicie o servidor de desenvolvimento: php artisan serve
+
+Execute as migrações:
+
+bash
+Copy code
+php artisan migrate
+Inicie o servidor de desenvolvimento:
+bash
+Copy code
+php artisan serve
+🌐 Rotas
+Autenticação:
+
+POST /v1/register - Registro de novo usuário.
+POST /v1/login - Login de usuário.
+POST /v1/logout - Logout de usuário.
+Transações:
+
+POST /v1/transactions/create - Criar uma nova transação.
+GET /v1/transactions/list - Listar transações.
+Usuários:
+
+GET /v1/users/ - Detalhes do usuário logado.
+POST /v1/users/ - Adicionar um novo usuário.
+GET /v1/users/email/{email} - Obter usuário por e-mail.
+GET /v1/users/details - Obter detalhes do usuário logado.
+Outros:
+
+GET /v1/check-queue - Verificar status da fila.
+📡 Webhooks
+POST /api/v1/users/details - Webhook para receber notificações de atualizações de usuário.
+🤝 Contribuição
+🌟 Pull requests são bem-vindos! Para mudanças importantes, abra uma issue primeiro para discutir o que você gostaria de mudar.
+
+📜 Licença
+MIT
+
