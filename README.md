@@ -134,5 +134,8 @@ POST /api/v1/users/details - Webhook para receber notificações de atualizaçõ
 
 
 
+![Uploading image.png…]()
+
+
 📜 Licença MIT
 
