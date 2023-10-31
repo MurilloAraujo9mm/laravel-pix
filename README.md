@@ -96,7 +96,7 @@ RabbitMQ (opcional)
 1 - Clone o repositório:
 
 Copy code
-git clone [https://github.com/seu_usuario/seu_projeto.git](https://github.com/MurilloAraujo9mm/laravel-pix)
+git clone [https://github.com/MurilloAraujo9mm/laravel-pix.git]
 
 Instale as dependências:
 
