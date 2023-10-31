@@ -134,7 +134,7 @@ POST /api/v1/users/details - Webhook para receber notificações de atualizaçõ
 
 
 
-![Uploading image.png…]()
+![image](https://github.com/MurilloAraujo9mm/laravel-pix/assets/26441702/ce767a00-d222-4c16-b3b0-a9789a1498e3)
 
 
 📜 Licença MIT
