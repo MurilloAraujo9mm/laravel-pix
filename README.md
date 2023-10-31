@@ -129,12 +129,8 @@ GET /v1/users/details - Obter detalhes do usuário logado.
 Outros:
 GET /v1/check-queue - Verificar status da fila.
 
-📡 Webhooks
-POST /api/v1/users/details - Webhook para receber notificações de atualizações de usuário.
+![image](https://github.com/MurilloAraujo9mm/laravel-pix/assets/26441702/82060f15-bb7e-4d26-a90f-58e5f0f887db)
 
-
-
-![image](https://github.com/MurilloAraujo9mm/laravel-pix/assets/26441702/ce767a00-d222-4c16-b3b0-a9789a1498e3)
 
 
 📜 Licença MIT
