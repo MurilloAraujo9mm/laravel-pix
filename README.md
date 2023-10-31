@@ -67,7 +67,7 @@ The Laravel framework is open-sourced software licensed under the [MIT license](
 
 
 🚀 Sistema de Transações em Laravel
-Um sistema simplificado para gerenciar transações financeiras e autenticação de usuários em Laravel.
+Um sistema simplificado para gerenciar transações financeiras e autenticação de usuários em Laravel e front com React.
 
 📋 Índice
 Recursos
