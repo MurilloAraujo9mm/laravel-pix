@@ -139,4 +139,3 @@ POST /api/v1/users/details - Webhook para receber notificações de atualizaçõ
 
 📜 Licença
 MIT
-
