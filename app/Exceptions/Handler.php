@@ -3,6 +3,7 @@
 namespace App\Exceptions;
 
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Illuminate\Http\Response;
 use Throwable;
 
 class Handler extends ExceptionHandler
@@ -31,7 +32,7 @@ class Handler extends ExceptionHandler
     public function render($request, Throwable $exception)
     {
         if ($exception instanceof \Illuminate\Http\Exceptions\ThrottleRequestsException) {
-            return response()->json(['message' => 'Sua mensagem personalizada aqui'], 429);
+            return response()->json(['message' => 'Bloqueado temporariamnte por excesso de tentativas'], Response::HTTP_TOO_MANY_REQUESTS);
         }
 
         return parent::render($request, $exception);

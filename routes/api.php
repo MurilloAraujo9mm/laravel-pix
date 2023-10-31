@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\QueueController;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,27 +17,20 @@ use App\Http\Controllers\AuthController;
 |
 */
 
-Route::prefix('v1')->name('v1.')->group(function () {
+// Auth routes
+Route::post('v1/register', [AuthController::class, 'register']);
+Route::post('/v1/login', [AuthController::class, 'login']);
+Route::post('v1/logout', [AuthController::class, 'logout'])->middleware(['auth:api', 'check.blacklist']);
 
-    Route::post('/register', [AuthController::class, 'register'])->name('register');
-    Route::post('/login', [AuthController::class, 'login'])->name('login');
-    Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
-    Route::middleware(['auth:api', 'check.blacklist', 'custom.throttle:10,1'])->group(function() {
+// Transaction routes
+Route::post('/v1/transaction/create', [TransactionController::class, 'store'])->middleware(['auth:api', 'check.blacklist']);
+Route::get('/v1/transaction/list', [TransactionController::class, 'listTransactions'])->middleware(['auth:api', 'check.blacklist', 'custom.throttle:10,1']);
 
-        Route::prefix('transaction')->name('transactions.')->group(function() {
-            Route::post('/create', [TransactionController::class, 'store'])->name('store');
-            Route::get('/list', [TransactionController::class, 'listTransactions'])->name('list');
-        });
 
-        // User routes
-        Route::prefix('users')->name('users.')->group(function() {
-            Route::get('/', [UserController::class, 'index'])->name('index');
-            Route::post('/', [UserController::class, 'store'])->name('store');
-            Route::get('/{id}', [UserController::class, 'show'])->name('show');
-            Route::get('/email/{email}', [UserController::class, 'showByEmail'])->name('showByEmail');
-            Route::get('/latest', [UserController::class, 'showLatest'])->name('showLatest');
-        });
-        
-    });
-});
+Route::get('/v1/users', [UserController::class, 'index']);
+Route::post('/v1/user/account/create', [UserController::class, 'store']);
+Route::get('v1/user/email/{email}', [UserController::class, 'showByEmail']);
+Route::get('v1/user/details', [UserController::class, 'userDetail'])->middleware(['auth:api', 'check.blacklist']);
+
+Route::get('v1/check-queue', [QueueController::class, 'checkQueue'])->middleware(['auth:api', 'check.blacklist']);

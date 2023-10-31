@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Services;
+namespace App\Services\Account;
 
 use App\Models\Account;
 use App\Repositories\Interfaces\AccountRepositoryInterface;
@@ -45,6 +45,7 @@ class AccountService
      */
     public function createAccount(array $data): Account
     {
+
         return $this->accountRepository->create($data);
     }
 

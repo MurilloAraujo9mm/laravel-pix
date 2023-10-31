@@ -64,3 +64,79 @@ If you discover a security vulnerability within Laravel, please send an e-mail t
 ## License
 
 The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+
+
+🚀 Sistema de Transações em Laravel
+Um sistema simplificado para gerenciar transações financeiras e autenticação de usuários em Laravel.
+
+📋 Índice
+Recursos
+Pré-requisitos
+Instalação
+Rotas
+Webhooks
+Contribuição
+
+Licença
+
+✨ Recursos
+🔐 Registro e autenticação de usuários.
+📜 Listagem de transações do usuário autenticado.
+💸 Criação de novas transações.
+📡 Webhook para notificar atualizações de usuários.
+
+🧰 Pré-requisitos
+PHP >= 7.4
+Composer
+Servidor MySQL
+Laravel 8.x
+RabbitMQ (opcional)
+
+🛠️ Instalação
+1 - Clone o repositório:
+bash
+Copy code
+git clone https://github.com/seu_usuario/seu_projeto.git
+Instale as dependências:
+bash
+Copy code
+cd seu_projeto
+composer install
+Configure o arquivo .env com as informações do banco de dados e outras configurações.
+
+Execute as migrações:
+
+bash
+Copy code
+php artisan migrate
+Inicie o servidor de desenvolvimento:
+bash
+Copy code
+php artisan serve
+🌐 Rotas
+Autenticação:
+
+POST /v1/register - Registro de novo usuário.
+POST /v1/login - Login de usuário.
+POST /v1/logout - Logout de usuário.
+Transações:
+
+POST /v1/transactions/create - Criar uma nova transação.
+GET /v1/transactions/list - Listar transações.
+Usuários:
+
+GET /v1/users/ - Detalhes do usuário logado.
+POST /v1/users/ - Adicionar um novo usuário.
+GET /v1/users/email/{email} - Obter usuário por e-mail.
+GET /v1/users/details - Obter detalhes do usuário logado.
+Outros:
+
+GET /v1/check-queue - Verificar status da fila.
+📡 Webhooks
+POST /api/v1/users/details - Webhook para receber notificações de atualizações de usuário.
+🤝 Contribuição
+🌟 Pull requests são bem-vindos! Para mudanças importantes, abra uma issue primeiro para discutir o que você gostaria de mudar.
+
+📜 Licença
+MIT
+
