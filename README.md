@@ -67,7 +67,7 @@ The Laravel framework is open-sourced software licensed under the [MIT license](
 
 
 🚀 Sistema de Transações em Laravel
-Um sistema simplificado para gerenciar transações financeiras e autenticação de usuários em Laravel.
+Um sistema simplificado para gerenciar transações financeiras e autenticação de usuários em Laravel e front com React.
 
 📋 Índice
 Recursos
@@ -94,49 +94,29 @@ RabbitMQ (opcional)
 
 🛠️ Instalação
 1 - Clone o repositório:
-bash
-Copy code
-git clone https://github.com/seu_usuario/seu_projeto.git
+
+Copy code: git clone: (https://github.com/MurilloAraujo9mm/laravel-pix.git)
+
 Instale as dependências:
-bash
-Copy code
-cd seu_projeto
-composer install
-Configure o arquivo .env com as informações do banco de dados e outras configurações.
+
+Copy code: cd laravel-pix
+
+sail composer install
 
 Execute as migrações:
 
-bash
-Copy code
-php artisan migrate
+Copy code: sail artisan migrate
+
 Inicie o servidor de desenvolvimento:
-bash
-Copy code
-php artisan serve
-🌐 Rotas
-Autenticação:
 
-POST /v1/register - Registro de novo usuário.
-POST /v1/login - Login de usuário.
-POST /v1/logout - Logout de usuário.
-Transações:
+Copy code: sail up -d
 
-POST /v1/transactions/create - Criar uma nova transação.
-GET /v1/transactions/list - Listar transações.
-Usuários:
+Diagrama C4:
 
-GET /v1/users/ - Detalhes do usuário logado.
-POST /v1/users/ - Adicionar um novo usuário.
-GET /v1/users/email/{email} - Obter usuário por e-mail.
-GET /v1/users/details - Obter detalhes do usuário logado.
-Outros:
+![image](https://github.com/MurilloAraujo9mm/laravel-pix/assets/26441702/3aa716cf-b5c6-4734-a168-83015cf4c852)
 
-GET /v1/check-queue - Verificar status da fila.
-📡 Webhooks
-POST /api/v1/users/details - Webhook para receber notificações de atualizações de usuário.
-🤝 Contribuição
-🌟 Pull requests são bem-vindos! Para mudanças importantes, abra uma issue primeiro para discutir o que você gostaria de mudar.
+![Captura de tela de 2023-10-31 13-08-29](https://github.com/MurilloAraujo9mm/laravel-pix/assets/26441702/85fb7cd0-5ff5-44e8-b112-c7aae0c22a8a)
 
-📜 Licença
-MIT
 
+
+📜 Licença MIT

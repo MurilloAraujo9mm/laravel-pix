@@ -1,10 +1,9 @@
 <?php
 
-namespace App\Repositories;
+namespace App\Repositories\Transaction;
 
 use App\Models\Account;
 use App\Models\Transaction;
-use App\Repositories\Interfaces\TransactionRepositoryInterface;
 use Illuminate\Support\Facades\DB;
 
 /**

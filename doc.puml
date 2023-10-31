@@ -1,0 +1,31 @@
+@startuml
+
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Container.puml
+
+Person(user, "Usuário", "Usuário que interage com o sistema.")
+
+System_Boundary(sistema, "Sistema de Transações") {
+    Container(webapp, "Web App", "Browser", "Interface de usuário para gerenciar transações e autenticação.")
+    Container(api, "API Backend", "PHP, Laravel", "Gerencia todas as operações relacionadas a transações e autenticação.")
+    Container(db, "Banco de Dados", "MySQL", "Armazena informações de usuários e transações.")
+    Container(rabbitmq, "RabbitMQ", "Message Broker", "Processa pagamentos e integrações assíncronas.")
+}
+
+
+Rel(user, webapp, "Usa", "HTTPS")
+Rel(webapp, api, "Chama /v1/login", "HTTPS")
+Rel(webapp, api, "Chama /v1/logout", "HTTPS")
+Rel(webapp, api, "Chama /v1/transaction/create", "HTTPS")
+Rel(webapp, api, "Chama /v1/transaction/list", "HTTPS")
+Rel(webapp, api, "Chama /v1/check-queue", "HTTPS")
+Rel(webapp, api, "Chama /v1/user/details", "HTTPS")
+Rel(api, db, "Lê/Escreve")
+Rel(api, rabbitmq, "Publica evento 'Nova Transação'")
+Rel(rabbitmq, api, "Notifica sobre processamento de pagamento")
+
+System(payment_processor, "Processador de Pagamento", "Processa a transação e notifica o RabbitMQ.")
+Rel(api, payment_processor, "Solicita processamento de pagamento")
+Rel(payment_processor, rabbitmq, "Publica evento 'Pagamento Processado'")
+Rel(rabbitmq, api, "Notifica sobre confirmação de pagamento")
+
+@enduml

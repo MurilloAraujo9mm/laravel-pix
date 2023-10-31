@@ -3,7 +3,7 @@
 namespace App\Services\Account;
 
 use App\Models\Account;
-use App\Repositories\Interfaces\AccountRepositoryInterface;
+use App\Repositories\Account\AccountRepositoryInterface;
 use Illuminate\Database\Eloquent\Collection;
 
 /**

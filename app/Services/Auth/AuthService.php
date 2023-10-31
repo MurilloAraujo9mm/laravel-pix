@@ -2,8 +2,7 @@
 
     namespace App\Services\Auth;
 
-    use App\Repositories\Interfaces\AccountRepositoryInterface;
-    use App\Repositories\Interfaces\AuthRepositoryInterface;
+    use App\Repositories\Auth\AuthRepositoryInterface;
     use Illuminate\Support\Facades\Hash;
     use Tymon\JWTAuth\Facades\JWTAuth;
 
@@ -59,7 +58,7 @@
             ];
         }
 
-    
+
         /**
          * Logs out a user and invalidates their JWT token.
          * @param string $token

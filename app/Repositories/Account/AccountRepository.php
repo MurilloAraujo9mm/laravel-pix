@@ -1,9 +1,8 @@
 <?php
 
-namespace App\Repositories;
+namespace App\Repositories\Account;
 
 use App\Models\Account;
-use App\Repositories\Interfaces\AccountRepositoryInterface;
 
 /**
  * Class AccountRepository

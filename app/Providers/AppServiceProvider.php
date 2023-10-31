@@ -4,17 +4,17 @@ namespace App\Providers;
 
 use App\Models\Account;
 use App\Observers\AccountObserver;
-use Illuminate\Support\ServiceProvider;
-use App\Repositories\Interfaces\AuthRepositoryInterface;
-use App\Repositories\AuthRepository;
-use App\Repositories\Interfaces\AccountRepositoryInterface;
-use App\Repositories\AccountRepository;
-use App\Repositories\Interfaces\TransactionRepositoryInterface;
-use App\Repositories\Interfaces\UserRepositoryInterface;
-use App\Repositories\TransactionRepository;
-use App\Repositories\UserRepository;
+use App\Repositories\Account\AccountRepository;
+use App\Repositories\Account\AccountRepositoryInterface;
+use App\Repositories\Auth\AuthRepository;
+use App\Repositories\Auth\AuthRepositoryInterface;
+use App\Repositories\Transaction\TransactionRepository;
+use App\Repositories\Transaction\TransactionRepositoryInterface;
+use App\Repositories\Users\UserRepository;
+use App\Repositories\Users\UserRepositoryInterface;
 use App\Services\AMQP\AMQPInterface;
 use App\Services\AMQP\AMQService;
+use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
 {

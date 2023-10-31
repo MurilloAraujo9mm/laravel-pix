@@ -3,12 +3,11 @@
 namespace App\Services\Transaction;
 
 use App\Models\Account;
-use App\Repositories\Interfaces\AccountRepositoryInterface;
-use App\Repositories\Interfaces\TransactionRepositoryInterface;
+use App\Repositories\Account\AccountRepositoryInterface;
+use App\Repositories\Transaction\TransactionRepositoryInterface;
 use App\Services\AMQP\RabbitMQ;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
-use Spatie\WebhookServer\WebhookCall;
 
 
 /**
