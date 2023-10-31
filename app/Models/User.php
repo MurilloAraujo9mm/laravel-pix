@@ -54,6 +54,7 @@ class User extends Authenticatable implements JWTSubject
         return $this->hasMany(Account::class);
     }
 
+    
     /**
      * Get the transactions sent by the user.
      * @return \Illuminate\Database\Eloquent\Relations\HasMany

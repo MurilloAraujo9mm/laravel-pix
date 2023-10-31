@@ -1,13 +1,15 @@
 <?php
 
-namespace App\Services;
+namespace App\Services\Transaction;
 
 use App\Models\Account;
 use App\Repositories\Interfaces\AccountRepositoryInterface;
 use App\Repositories\Interfaces\TransactionRepositoryInterface;
+use App\Services\AMQP\RabbitMQ;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Str;
+use Spatie\WebhookServer\WebhookCall;
+
 
 /**
  * Handles transaction-related operations.
@@ -20,6 +22,8 @@ class TransactionService
     /** @var AccountRepositoryInterface */
     protected AccountRepositoryInterface $accountRepository;
 
+    protected $ballance = null;
+
     /**
      * TransactionService constructor.
      * @param TransactionRepositoryInterface $transactionRepository
@@ -31,15 +35,26 @@ class TransactionService
         $this->accountRepository = $accountRepository;
     }
 
-    /**
-     * Retrieve all transactions.
-     *
-     * @return Collection
-     */
-    public function listAllTransactions(): Collection
+
+    public function listAllTransactions()
     {
         return $this->transactionRepository->all();
     }
+
+    public function findTransaction(int $userId, string $type)
+    {
+        if ($type === 'sender') {
+            return $this->transactionRepository->findBySenderId($userId);
+        }
+
+        if ($type === 'recipient') {
+            return $this->transactionRepository->findByRecipientId($userId);
+        }
+
+        throw new \Exception('Tipo de busca inválido.');
+    }
+
+
 
     /**
      * Process a transfer using a given Pix key.
@@ -48,9 +63,12 @@ class TransactionService
      * @throws \Exception If the recipient is not found, or if trying to transfer to oneself, or if there's insufficient balance.
      * @return void
      */
-    public function processTransfer(string $pixKey, float $amount, string $transactionType): void
+    public function processTransfer(string $pixKey, float $amount, string $transactionType)
     {
-        DB::transaction(function () use ($pixKey, $amount, $transactionType) {
+
+
+        DB::transaction(function () use ($pixKey, $amount, $transactionType, &$balanceAfterTransaction) {
+
             $recipientAccount = Account::where('pix_key', $pixKey)->first();
 
             if (!$recipientAccount) {
@@ -58,19 +76,21 @@ class TransactionService
             }
 
             $senderAccount = $this->accountRepository->getLoggedInUserAccount();
+            $this->ballance = $senderAccount->balance;
 
             if ($senderAccount->id === $recipientAccount->id) {
                 throw new \Exception('Transações para a mesma conta não são permitidas.');
             }
 
             if ($senderAccount->balance < $amount) {
-                throw new \Exception('Saldo insuficiente.');
+                throw new \Exception(
+                    'Saldo insuficiente. Você tem apenas ' . number_format($senderAccount->balance, 2, '.', ',') . " reais em sua conta"
+                );
             }
 
             $this->transferFromSender($senderAccount->id, $amount);
             $this->transferToRecipient($recipientAccount->id, $amount);
-
-            $data = [
+            $this->recordTransaction([
                 'sender_id' => $senderAccount->user_id,
                 'sender_account_id' => $senderAccount->id,
                 'recipient_id' => $recipientAccount->user_id,
@@ -79,10 +99,23 @@ class TransactionService
                 'description' => $this->validateTransactionType($transactionType),
                 'status' => 'pending',
                 'transaction_date' => now(),
-            ];
+            ]);
 
-            $this->recordTransaction($data);
+            (new RabbitMQ())->producer(
+                env('RABBITMQ_QUEUE', 'default_queue_name'),
+                [
+                    'amount' => number_format($amount, 2, '.', ''),
+                    "key_pix" => $recipientAccount->pix_key,
+                    'transaction_date' => now(),
+                    'description' => $transactionType,
+                    'status' => 'pending'
+                ],
+                'amq.direct'
+            );
+
         });
+
+        return $this->ballance;
     }
 
     /**
@@ -127,7 +160,7 @@ class TransactionService
     /**
      * Records a transaction with the provided data.
      * @param array $data The transaction data.
-     * 
+     *
      * @return void
      */
     protected function recordTransaction(array $data): void

@@ -13,6 +13,8 @@ use App\Repositories\Interfaces\TransactionRepositoryInterface;
 use App\Repositories\Interfaces\UserRepositoryInterface;
 use App\Repositories\TransactionRepository;
 use App\Repositories\UserRepository;
+use App\Services\AMQP\AMQPInterface;
+use App\Services\AMQP\AMQService;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -26,6 +28,9 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(TransactionRepositoryInterface::class, TransactionRepository::class);
         $this->app->bind(UserRepositoryInterface::class, UserRepository::class);
         $this->app->bind(UserRepositoryInterface::class, UserRepository::class);
+        $this->app->bind(AMQPInterface::class, AMQService::class);
+        $this->app->register(\L5Swagger\L5SwaggerServiceProvider::class);
+
     }
 
     /**

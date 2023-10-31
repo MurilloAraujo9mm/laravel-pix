@@ -1,9 +1,10 @@
 <?php
 
-namespace App\Services;
+namespace App\Services\Users;
 
-use App\Repositories\UserRepository;
 use App\Repositories\AccountRepository;
+use App\Repositories\UserRepository;
+use Illuminate\Http\Response;
 use Illuminate\Support\Str;
 use Ramsey\Uuid\Uuid;
 
@@ -40,7 +41,7 @@ class UserService
             'user_id' => $user->id,
             'balance' => $data['balance'],
             'account_number' => $this->generateRandomAccountNumber(),
-            'pix_key' => $this->generatePixKeyForUser($user)
+            'pix_key' => $this->generatePixKeyForUser()
         ]);
 
 
@@ -84,5 +85,25 @@ class UserService
     public function findLatestUser()
     {
         return $this->userRepository->findLatest();
+    }
+
+    public function getUserDetails()
+    {
+        $user = auth('api')->user();
+
+        if (!$user) {
+            return response()->json(['error' => 'User not authenticated'], Response::HTTP_NOT_FOUND);
+        }
+
+        $account = $this->accountRepository->findByUserId($user->id);
+
+        if (!$account) {
+            throw new \Exception('Nenhuma conta foi encontrada para esse usuário');
+        }
+
+        return [
+            'account' => $user,
+            'user' => $account
+        ];
     }
 }

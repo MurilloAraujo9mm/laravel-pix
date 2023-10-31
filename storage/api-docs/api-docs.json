@@ -1,0 +1,441 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Laravel API",
+        "description": "Laravel API description",
+        "contact": {
+            "email": "your-email@example.com"
+        },
+        "license": {
+            "name": "Apache 2.0",
+            "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+        },
+        "version": "1.0.0"
+    },
+    "paths": {
+        "/api/auth/register": {
+            "post": {
+                "tags": [
+                    "Authentication"
+                ],
+                "summary": "Register a new user",
+                "description": "Register a new user and provide a token",
+                "operationId": "d764dd091cc4494ae0baf360b03319f3",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "name",
+                                    "email",
+                                    "password"
+                                ],
+                                "properties": {
+                                    "name": {
+                                        "description": "Name of the user",
+                                        "type": "string"
+                                    },
+                                    "email": {
+                                        "description": "Email of the user",
+                                        "type": "string"
+                                    },
+                                    "password": {
+                                        "description": "Password for the user",
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successfully registered",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "token": {
+                                            "description": "JWT Token for the user",
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/login": {
+            "post": {
+                "tags": [
+                    "Authentication"
+                ],
+                "summary": "Authenticate a user",
+                "description": "Authenticate a user and provide a token",
+                "operationId": "da2ca4d7a5cdec77b8b45a20373535cb",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "email",
+                                    "password"
+                                ],
+                                "properties": {
+                                    "email": {
+                                        "description": "Email of the user",
+                                        "type": "string"
+                                    },
+                                    "password": {
+                                        "description": "Password for the user",
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successfully authenticated",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "token": {
+                                            "description": "JWT Token for the user",
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "error": {
+                                            "description": "Error message for unauthorized request",
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/logout": {
+            "post": {
+                "tags": [
+                    "Authentication"
+                ],
+                "summary": "Logout a user",
+                "description": "Logout the user and invalidate the token",
+                "operationId": "c4eddaf1a2e990cc90e4326c0d731d41",
+                "responses": {
+                    "200": {
+                        "description": "Successfully logged out",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "description": "Logout success message",
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "description": "Error message for failed logout request",
+                                            "type": "string"
+                                        },
+                                        "error": {
+                                            "description": "Detailed error message",
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "409": {
+                        "description": "Conflict",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "description": "Conflict error message",
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/transaction/create": {
+            "post": {
+                "tags": [
+                    "Transaction"
+                ],
+                "summary": "Store a new transaction",
+                "description": "Create a new transaction and store it in the database",
+                "operationId": "c55197378741023d49fa1401983a2e55",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "pix_key",
+                                    "amount",
+                                    "description"
+                                ],
+                                "properties": {
+                                    "pix_key": {
+                                        "description": "Pix key of the receiver",
+                                        "type": "string"
+                                    },
+                                    "amount": {
+                                        "description": "Amount to transfer",
+                                        "type": "number",
+                                        "format": "float"
+                                    },
+                                    "description": {
+                                        "description": "Description of the transaction",
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Transaction successfully stored",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "description": "Success message",
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "description": "Error message",
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/transaction/list": {
+            "get": {
+                "tags": [
+                    "Transaction"
+                ],
+                "summary": "List all transactions",
+                "description": "Retrieve and return a list of all transactions from the database",
+                "operationId": "229640708b7f8748ce1a95ff942bf171",
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "Bearer token for authorization",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "default": "Bearer your_token_here"
+                        }
+                    },
+                    {
+                        "name": "Accept",
+                        "in": "header",
+                        "description": "Accept header",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "default": "application/json"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "List of transactions",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "properties": {
+                                            "id": {
+                                                "description": "Transaction ID",
+                                                "type": "integer"
+                                            },
+                                            "sender_id": {
+                                                "description": "Sender ID",
+                                                "type": "integer"
+                                            },
+                                            "sender_account_id": {
+                                                "description": "Sender's Account ID",
+                                                "type": "integer"
+                                            },
+                                            "recipient_id": {
+                                                "description": "Recipient ID",
+                                                "type": "integer"
+                                            },
+                                            "recipient_account_id": {
+                                                "description": "Recipient's Account ID",
+                                                "type": "integer"
+                                            },
+                                            "amount": {
+                                                "description": "Amount of the transaction",
+                                                "type": "string"
+                                            },
+                                            "description": {
+                                                "description": "Description of the transaction",
+                                                "type": "string"
+                                            },
+                                            "status": {
+                                                "description": "Transaction status",
+                                                "type": "string"
+                                            },
+                                            "transaction_date": {
+                                                "description": "Date of the transaction",
+                                                "type": "string"
+                                            },
+                                            "created_at": {
+                                                "description": "Creation timestamp",
+                                                "type": "string",
+                                                "format": "date-time"
+                                            },
+                                            "updated_at": {
+                                                "description": "Last update timestamp",
+                                                "type": "string",
+                                                "format": "date-time"
+                                            },
+                                            "sender_account": {
+                                                "description": "Sender account details",
+                                                "type": "object",
+                                                "nullable": true
+                                            },
+                                            "sender": {
+                                                "description": "Details of the sender",
+                                                "properties": {
+                                                    "id": {
+                                                        "description": "Sender ID",
+                                                        "type": "integer"
+                                                    },
+                                                    "name": {
+                                                        "description": "Sender Name",
+                                                        "type": "string"
+                                                    },
+                                                    "email": {
+                                                        "description": "Sender Email",
+                                                        "type": "string"
+                                                    },
+                                                    "created_at": {
+                                                        "description": "Creation timestamp of sender",
+                                                        "type": "string",
+                                                        "format": "date-time"
+                                                    },
+                                                    "updated_at": {
+                                                        "description": "Last update timestamp of sender",
+                                                        "type": "string",
+                                                        "format": "date-time"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            },
+                                            "recipient": {
+                                                "description": "Details of the recipient",
+                                                "properties": {
+                                                    "id": {
+                                                        "description": "Recipient ID",
+                                                        "type": "integer"
+                                                    },
+                                                    "name": {
+                                                        "description": "Recipient Name",
+                                                        "type": "string"
+                                                    },
+                                                    "email": {
+                                                        "description": "Recipient Email",
+                                                        "type": "string"
+                                                    },
+                                                    "created_at": {
+                                                        "description": "Creation timestamp of recipient",
+                                                        "type": "string",
+                                                        "format": "date-time"
+                                                    },
+                                                    "updated_at": {
+                                                        "description": "Last update timestamp of recipient",
+                                                        "type": "string",
+                                                        "format": "date-time"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            }
+                                        },
+                                        "type": "object"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        }
+    }
+}

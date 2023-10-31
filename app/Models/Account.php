@@ -42,6 +42,8 @@ class Account extends Model
         return $this->hasMany(Transaction::class, 'from_account_id');
     }
 
+    
+
     /**
      * Get the transactions received by this account.
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
@@ -67,5 +69,10 @@ class Account extends Model
         self::creating(function ($model) {
             $model->pix_key = Str::uuid();
         });
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
     }
 }

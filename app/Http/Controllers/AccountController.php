@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreAccountRequest;
-use App\Services\AccountService;
+use App\Services\Account\AccountService;
 use Illuminate\Http\JsonResponse;
 
 class AccountController extends Controller
@@ -28,7 +28,7 @@ class AccountController extends Controller
     public function store(StoreAccountRequest $request): ?JsonResponse
     {
         $validatedData = $request->validated();
-        
+
         try {
             $account = $this->accountService->createAccount($validatedData);
             return response()->json(['message' => 'Conta criada com sucesso!', 'account' => $account], 201);
