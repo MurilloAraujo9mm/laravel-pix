@@ -106,36 +106,36 @@ Configure o arquivo .env com as informações do banco de dados e outras configu
 
 Execute as migrações:
 
-bash
-Copy code
-php artisan migrate
+copie e cole:  sail artisan migrate
 Inicie o servidor de desenvolvimento:
-bash
-Copy code
-php artisan serve
-🌐 Rotas
-Autenticação:
 
+
+sail up -d artisan serve
+
+🌐 Rotas
+
+Autenticação:
 POST /v1/register - Registro de novo usuário.
 POST /v1/login - Login de usuário.
 POST /v1/logout - Logout de usuário.
-Transações:
 
+Transações:
 POST /v1/transactions/create - Criar uma nova transação.
 GET /v1/transactions/list - Listar transações.
-Usuários:
 
+Usuários:
 GET /v1/users/ - Detalhes do usuário logado.
 POST /v1/users/ - Adicionar um novo usuário.
 GET /v1/users/email/{email} - Obter usuário por e-mail.
 GET /v1/users/details - Obter detalhes do usuário logado.
-Outros:
 
+Outros:
 GET /v1/check-queue - Verificar status da fila.
+
 📡 Webhooks
 POST /api/v1/users/details - Webhook para receber notificações de atualizações de usuário.
-🤝 Contribuição
-🌟 Pull requests são bem-vindos! Para mudanças importantes, abra uma issue primeiro para discutir o que você gostaria de mudar.
+
+
 
 📜 Licença
 MIT
