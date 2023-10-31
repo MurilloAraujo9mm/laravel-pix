@@ -2,8 +2,8 @@
 
 namespace App\Services\Users;
 
-use App\Repositories\AccountRepository;
-use App\Repositories\UserRepository;
+use App\Repositories\Account\AccountRepository;
+use App\Repositories\Users\UserRepository;
 use Illuminate\Http\Response;
 use Illuminate\Support\Str;
 use Ramsey\Uuid\Uuid;

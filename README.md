@@ -119,6 +119,4 @@ Diagrama C4:
 
 
 
-
-
 📜 Licença MIT
