@@ -177,9 +177,9 @@ class TransactionController extends Controller
     {
         try {
             $transactions = $transactionService->findTransaction($userId, $type);
-            return response()->json($transactions, 200);
+            return response()->json($transactions, Response::HTTP_OK);
         } catch (\Exception $e) {
-            return response()->json(['error' => $e->getMessage()], 400);
+            return response()->json(['error' => $e->getMessage()], Response::HTTP_NOT_FOUND);
         }
     }
 

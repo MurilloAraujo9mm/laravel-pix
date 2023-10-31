@@ -113,11 +113,6 @@ class TransactionService
                 'amq.direct'
             );
 
-            WebhookCall::create()
-            ->url('http://localhost:80/api/v1/users/details')
-            ->payload(['amount' => $amount, 'pixKey' => $pixKey])
-            ->useSecret('eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vbG9jYWxob3N0L2FwaS92MS9sb2dpbiIsImlhdCI6MTY5ODcxNTI3OCwiZXhwIjoxNjk4NzE4ODc4LCJuYmYiOjE2OTg3MTUyNzgsImp0aSI6IkVCdktmT0VpSE5WblA4QUsiLCJzdWIiOiIxOSIsInBydiI6IjIzYmQ1Yzg5NDlmNjAwYWRiMzllNzAxYzQwMDg3MmRiN2E1OTc2ZjcifQ.Nl4-RbOFkfgruiOl3jdeMw_8DL0_E3zRivrrAV7Phwg') 
-            ->dispatch();
         });
 
         return $this->ballance;

@@ -41,7 +41,7 @@ class UserService
             'user_id' => $user->id,
             'balance' => $data['balance'],
             'account_number' => $this->generateRandomAccountNumber(),
-            'pix_key' => $this->generatePixKeyForUser($user)
+            'pix_key' => $this->generatePixKeyForUser()
         ]);
 
 
