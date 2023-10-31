@@ -8,7 +8,7 @@ interface TransactionRepositoryInterface
      * Fetch all transactions.
      * @return \Illuminate\Database\Eloquent\Collection|static[]
      */
-    public function all(): \Illuminate\Database\Eloquent\Collection;
+    public function all():  \Illuminate\Contracts\Pagination\LengthAwarePaginator;
 
 
     /**

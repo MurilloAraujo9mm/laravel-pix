@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Services\UserService;
 use App\Http\Requests\StoreUserRequest;
+use App\Services\Users\UserService;
 use Illuminate\Http\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -39,7 +39,7 @@ class UserController extends Controller
     public function store(StoreUserRequest $request): JsonResponse
     {
         $validatedData = $request->validated();
-        
+
         try {
             $this->userService->createUser($validatedData);
             return response()->json(['message' => 'Usuário e conta criados com sucesso!'], Response::HTTP_CREATED);
@@ -48,21 +48,6 @@ class UserController extends Controller
         }
     }
 
-    /**
-     * Display the specified user by ID.
-     * @param int $id
-     * @return JsonResponse
-     */
-    public function show(int $id): JsonResponse
-    {
-        $user = $this->userService->findUserById($id);
-
-        if (!$user) {
-            return response()->json(['message' => 'Usuário não encontrado.'], Response::HTTP_NOT_FOUND);
-        }
-
-        return response()->json($user,  Response::HTTP_OK);
-    }
 
     /**
      * Display the specified user by email.
@@ -94,4 +79,12 @@ class UserController extends Controller
 
         return response()->json($user, 200);
     }
+
+    public function userDetail()
+    {
+        $detailUser = $this->userService->getUserDetails();
+
+        return response()->json($detailUser, Response::HTTP_OK);
+    }
+
 }

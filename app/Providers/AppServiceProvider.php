@@ -29,6 +29,8 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(UserRepositoryInterface::class, UserRepository::class);
         $this->app->bind(UserRepositoryInterface::class, UserRepository::class);
         $this->app->bind(AMQPInterface::class, AMQService::class);
+        $this->app->register(\L5Swagger\L5SwaggerServiceProvider::class);
+
     }
 
     /**

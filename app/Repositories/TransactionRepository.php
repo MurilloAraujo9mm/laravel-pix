@@ -13,16 +13,15 @@ use Illuminate\Support\Facades\DB;
  * @package App\Repositories
  */
 class TransactionRepository implements TransactionRepositoryInterface
-{   
+{
     /**
-     * Fetch all transactions.
-     * @return \Illuminate\Database\Eloquent\Collection|static[]
+     * Fetch paginated transactions.
+     * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator
      */
-    public function all(): \Illuminate\Database\Eloquent\Collection
+    public function all(): \Illuminate\Contracts\Pagination\LengthAwarePaginator
     {
-        return Transaction::with(['senderAccount', 'sender', 'recipient'])->get();
+        return Transaction::with(['senderAccount', 'sender', 'recipient'])->paginate(10);
     }
-    
 
     /**
      * Create a new transaction record.
@@ -84,22 +83,18 @@ class TransactionRepository implements TransactionRepositoryInterface
 
     protected function transferFromSender($accountId, $amount)
     {
-        // Deduz o valor da conta do remetente
-        // Exemplo simplificado; adicione verificações e lógicas conforme necessário
         Account::find($accountId)->decrement('balance', $amount);
     }
 
     protected function transferToRecipient($accountId, $amount)
     {
-        // Adiciona valor à conta do destinatário
-        // Exemplo simplificado; adicione verificações e lógicas conforme necessário
+
         Account::find($accountId)->increment('balance', $amount);
     }
 
 
     protected function recordTransaction($data)
     {
-        // Grava os detalhes da transação
         Transaction::create($data);
     }
 }
